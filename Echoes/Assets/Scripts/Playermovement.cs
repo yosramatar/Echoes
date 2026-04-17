@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 5f;
+
     private Rigidbody2D rb;
     private Vector2 movement;
 
@@ -13,11 +14,19 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        movement.x = Input.GetKey(KeyCode.D) ? 1 :
-                     Input.GetKey(KeyCode.A) ? -1 : 0;
+        movement.x = 0f;
+        movement.y = 0f;
 
-        movement.y = Input.GetKey(KeyCode.W) ? 1 :
-                     Input.GetKey(KeyCode.S) ? -1 : 0;
+        if (Input.GetKey(KeyCode.A))
+            movement.x = -1f;
+        if (Input.GetKey(KeyCode.D))
+            movement.x = 1f;
+        if (Input.GetKey(KeyCode.W))
+            movement.y = 1f;
+        if (Input.GetKey(KeyCode.S))
+            movement.y = -1f;
+
+        movement = movement.normalized;
     }
 
     void FixedUpdate()
